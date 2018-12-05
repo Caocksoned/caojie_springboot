@@ -31,4 +31,8 @@ public class CategoryService {
     public void add(Category bean){
         categoryDao.save(bean);
     }
+
+    public void delete(int id) {
+        categoryDao.delete(id);
+    }
 }
