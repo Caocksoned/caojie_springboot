@@ -13,7 +13,7 @@ public class TestTmall {
         }
         try (
                 Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/tmall_springboot?" +
-                "useUnicode=true&characterEncodeing=utf8", "root", "root");
+                "useUnicode=true&characterEncodeing=utf8", "root", "admin");
                 Statement s = c.createStatement()
         ){
             for (int i = 1; i <= 10 ; i++){

@@ -11,14 +11,15 @@ public class PropertyController {
     @Autowired PropertyService propertyService;
 
     @GetMapping("/categories/{cid}/properties")
-    public Page4Navigator<Property> list(@PathVariable int cid,@RequestParam(value = "start", defaultValue = "0") int start,
-                                         @RequestParam(value = "size", defaultValue = "5") int size) {
+    public Page4Navigator<Property> list(@PathVariable("cid") int cid,@RequestParam(value = "start", defaultValue = "0") int start,
+                                         @RequestParam(value = "size", defaultValue = "5") int size)throws Exception {
         start = start<0?0:start;
-        Page4Navigator<Property> page =propertyService.list(cid,size, start, 5);  //5表示导航分页最多有5个，像 [1,2,3,4,5] 这样
+        Page4Navigator<Property> page =propertyService.list(cid,start,size, 5);  //5表示导航分页最多有5个，像 [1,2,3,4,5] 这样
         return page;
     }
+
     @GetMapping("/properties/{id}")
-    public Property get(@PathVariable int id){
+    public Property get(@PathVariable int id) throws Exception{
         Property bean = propertyService.get(id);
         return bean;
     }
@@ -28,7 +29,6 @@ public class PropertyController {
         propertyService.add(bean);
         return bean;
     }
-
 
     @PutMapping("/properties")
     public Property update(@RequestBody Property bean){

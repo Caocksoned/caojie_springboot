@@ -18,10 +18,6 @@ import java.io.IOException;
 public class CategoryController {
     @Autowired CategoryService categoryService;
 
-    /*@GetMapping("/categories")
-    public List<Category> list()throws Exception {
-        return categoryService.list();
-    }*/
 
     @GetMapping("/categories")
     public Page4Navigator<Category> list(@RequestParam(value = "start", defaultValue = "0") int start,
@@ -29,6 +25,12 @@ public class CategoryController {
         start = start<0?0:start;
         Page4Navigator<Category> page =categoryService.list(start, size, 5);  //5表示导航分页最多有5个，像 [1,2,3,4,5] 这样
         return page;
+    }
+
+    @GetMapping("/categories/{id}")
+    public Category get(@PathVariable("id") int id) throws Exception {
+        Category bean=categoryService.get(id);
+        return bean;
     }
     @PostMapping("/categories")
     public Object add(Category bean, MultipartFile image, HttpServletRequest request) throws Exception {
@@ -55,4 +57,15 @@ public class CategoryController {
         file.delete();
         return null;
     }
+
+    @PutMapping("/categories/{id}")
+    public Object update(Category bean,MultipartFile image,HttpServletRequest request) throws Exception{
+        bean.setName(request.getParameter("name"));
+        categoryService.update(bean);
+        if(null != image){
+            saveOrUpdateImageFile(bean, image, request);
+        }
+        return bean;
+    }
+
 }

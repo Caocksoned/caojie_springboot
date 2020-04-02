@@ -39,4 +39,6 @@ public class CategoryService {
     public Category get(int id){
        return categoryDao.getOne(id);
     }
+
+    public Category update(Category bean) {return categoryDao.save(bean);}
 }

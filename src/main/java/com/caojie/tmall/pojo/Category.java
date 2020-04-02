@@ -14,7 +14,7 @@ public class Category {
     int id;
 
     @Column(name="name")
-    String name;
+    private String name;
 
     public int getId() {
         return id;
