@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/admin/adminHeader::html('用户管理')" ></head>
+<body>
+<div th:replace="include/admin/adminNavigator::html" ></div>
+<script>
+    $(function () {
+        var date4Vue ={
+            uri:"users",
+            beans:[],
+            bean:{id:0, name:''},
+            pagination:{}
+        }
+        var vue = new Vue({
+            el: "#workingArea",
+            data: date4Vue,
+            mounted: function () {
+                this.list(0);
+            },
+            methods: {
+                list: function (start) {
+                    var url = this.uri+ "?start="+start;
+                    axios.get(url).then(function (response) {
+                        vue.pagination = response.data;
+                        vue.beans = response.data.content;
+                    })
+                }
+             }
+         })
+    })
+</script>
+<div id="workingArea" >
+    <h1 class="label label-info" >用户管理</h1>
+    <br>
+    <br>
+    <br>
+    <div class="listDataTableDiv">
+        <table class="table table-striped table-bordered table-hover  table-condensed">
+            <thead>
+            <tr class="success">
+                <th>ID</th>
+                <th>用户名称</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--使用 v-for进行遍历， 这个 beans 就表示data4Vue里面的beans属性。-->
+            <tr v-for="bean in beans">
+                <!--bean就是遍历出来的每个id, 这里就是输出每个分类的id.-->
+                <td>{{bean.id}}</td>
+                <td>{{bean.name}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="include/admin/adminPage::html" ></div>
+</div>
+
+<div th:replace="include/admin/adminFooter::html" ></div>
+</body>
+</html>
