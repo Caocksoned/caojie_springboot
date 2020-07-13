@@ -17,7 +17,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ImageUtil {
-    //吧图片格式改成jpg
+    //把图片格式改成jpg
     public static BufferedImage change2jpg(File f) {
         try {
             Image i = Toolkit.getDefaultToolkit().createImage(f.getAbsolutePath());

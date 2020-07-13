@@ -60,7 +60,6 @@ public class AdminPageController {
     @GetMapping(value="/admin_propertyValue_edit")
     public String editPropertyValue(){
         return "admin/editPropertyValue";
-
     }
 
     @GetMapping(value="/admin_user_list")

@@ -12,7 +12,7 @@
             bean: { id: 0, name: '', hp: '0'},
             file:''
         };
-	
+
         //ViewModel
         var vue = new Vue({
             el: '#workingArea',
@@ -36,7 +36,7 @@
                     //axios.js 上传文件要用 formData 这种方式
                     var formData = new FormData();
                     formData.append("image", this.file);
-                    formData.append("name", this.bean.name);
+                    formData.append("name", this.bean. );
                     axios.put(url,formData).then(function(response){
                         location.href=vue.listURL;
                     });

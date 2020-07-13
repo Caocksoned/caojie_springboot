@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PropertyService {
 
@@ -34,6 +36,15 @@ public class PropertyService {
 
     public void update(Property bean) {
         propertyDAO.save(bean);
+    }
+
+    public List<Property> get(Category category){
+       return propertyDAO.findByCategory(category);
+    }
+
+    /*通过分类获取所有属性结合*/
+    public  List<Property> list(Category category){
+        return  propertyDAO.findByCategory(category);
     }
 
     public Page4Navigator<Property> list(int cid, int start, int size,int navigatePages) {
