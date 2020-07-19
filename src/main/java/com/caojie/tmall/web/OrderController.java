@@ -1,0 +1,38 @@
+package com.caojie.tmall.web;
+
+import com.caojie.tmall.pojo.Category;
+import com.caojie.tmall.pojo.Order;
+import com.caojie.tmall.service.OrderItemService;
+import com.caojie.tmall.service.OrderService;
+import com.caojie.tmall.util.Page4Navigator;
+import com.caojie.tmall.util.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.Date;
+
+@RestController
+public class OrderController {
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    OrderItemService orderItemService;
+
+    @GetMapping("/orders")
+    public Page4Navigator<Order> list(@RequestParam(value = "start", defaultValue = "0") int start,@RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
+        start = start<0?0:start;
+        Page4Navigator<Order> page =orderService.list(start, size, 5);
+        orderItemService.fill(page.getContent());
+        orderService.removeOrderFromOrderItem(page.getContent());
+        return page;
+    }
+    @PutMapping("deliveryOrder/{oid}")
+    public Object deliveryOrder(@PathVariable int oid) throws IOException {
+        Order o = orderService.get(oid);
+        o.setDeliverDate(new Date());
+        o.setStatus(OrderService.waitConfirm);
+        orderService.update(o);
+        return Result.success();
+    }
+}
