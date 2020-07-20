@@ -38,4 +38,8 @@ public class UserService {
         return  null!=user;
     }
 
+    public User get(String name, String password) {
+        return userDao.getByNameAndPassword(name,password);
+    }
+
 }

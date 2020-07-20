@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +44,8 @@ public class ProductService {
         Page<Product> pageFromJPA =productDao.findByCategory(category,pageable);
         return new Page4Navigator<>(pageFromJPA,navigatePages);
     }
+
+
 
     public void fill(List<Category> categorys) {
         for (Category category : categorys) {
