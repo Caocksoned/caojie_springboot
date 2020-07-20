@@ -1,24 +1,29 @@
 package com.caojie.tmall.pojo;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+
 @Entity
-@Table(name="productImage")
+@Table(name="orderItem")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
-public class ProductImage {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
     @ManyToOne
     @JoinColumn(name="pid")
-    @JsonBackReference()
     private Product product;
 
-    private String type;
+    @ManyToOne
+    @JoinColumn(name="oid")
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name="uid")
+    private User user;
+    private int number;
 
     public int getId() {
         return id;
@@ -36,11 +41,27 @@ public class ProductImage {
         this.product = product;
     }
 
-    public String getType() {
-        return type;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
