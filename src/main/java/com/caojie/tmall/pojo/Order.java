@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="order")
+@Table(name="order_")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class Order {
     @Id
@@ -28,7 +28,7 @@ public class Order {
     private String userMessage;
     private Date createDate;
     private Date payDate;
-    private Date deliverDate;
+    private Date deliveryDate;
     private Date confirmDate;
     private String status;
 
@@ -121,12 +121,12 @@ public class Order {
         this.payDate = payDate;
     }
 
-    public Date getDeliverDate() {
-        return deliverDate;
+    public Date getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setDeliverDate(Date deliverDate) {
-        this.deliverDate = deliverDate;
+    public void setDeliveryDate(Date deliverDate) {
+        this.deliveryDate = deliverDate;
     }
 
     public Date getConfirmDate() {

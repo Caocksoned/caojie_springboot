@@ -30,7 +30,7 @@ public class OrderController {
     @PutMapping("deliveryOrder/{oid}")
     public Object deliveryOrder(@PathVariable int oid) throws IOException {
         Order o = orderService.get(oid);
-        o.setDeliverDate(new Date());
+        o.setDeliveryDate(new Date());
         o.setStatus(OrderService.waitConfirm);
         orderService.update(o);
         return Result.success();
