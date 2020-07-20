@@ -33,5 +33,9 @@ public class UserService {
     public void update(User bean){
         userDao.save(bean);
     }
+    public Boolean isExist(String name){
+        User user =  userDao.findByName(name);
+        return  null!=user;
+    }
 
 }

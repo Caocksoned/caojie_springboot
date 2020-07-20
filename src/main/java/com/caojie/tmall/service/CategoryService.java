@@ -2,6 +2,7 @@ package com.caojie.tmall.service;
 
 import com.caojie.tmall.dao.CategoryDao;
 import com.caojie.tmall.pojo.Category;
+import com.caojie.tmall.pojo.Product;
 import com.caojie.tmall.util.Page4Navigator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,4 +42,19 @@ public class CategoryService {
     }
 
     public Category update(Category bean) {return categoryDao.save(bean);}
+
+    public void removeCategoryFromProduct(List<Category> cs) {
+        for (Category category : cs) {
+            removeCategoryFromProduct(category);
+        }
+    }
+
+    public void removeCategoryFromProduct(Category category) {
+        List<Product> products = category.getProducts();
+        if (null != products) {
+            for (Product product : products) {
+                product.setCategory(null);
+            }
+        }
+    }
 }

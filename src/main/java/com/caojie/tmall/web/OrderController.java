@@ -1,6 +1,5 @@
 package com.caojie.tmall.web;
 
-import com.caojie.tmall.pojo.Category;
 import com.caojie.tmall.pojo.Order;
 import com.caojie.tmall.service.OrderItemService;
 import com.caojie.tmall.service.OrderService;
